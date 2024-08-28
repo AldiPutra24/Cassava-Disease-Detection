@@ -35,7 +35,6 @@ The model is hosted on TensorFlow Hub, and the classification process involves u
    python app.py
    ```
 
-<br />
 
 ## References
 This project is based on the [TensorFlow Hub CropNet Cassava Disease Classifier tutorial](https://www.tensorflow.org/hub/tutorials/cropnet_cassava), which provides a comprehensive guide to using the CropNet model for cassava disease detection.
