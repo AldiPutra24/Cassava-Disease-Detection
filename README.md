@@ -33,6 +33,7 @@ The model is hosted on TensorFlow Hub, and the classification process involves u
    pip install flask tensorflow tensorflow-hub tensorflow-datasets matplotlib opencv-python
 
    python app.py
+
    ```
 
 
