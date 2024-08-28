@@ -21,13 +21,23 @@ The model is hosted on TensorFlow Hub, and the classification process involves u
 
 ## Installation
 
-1. **Clone the Repository**
    ```bash
    git clone https://github.com/AldiPutra24/cassava-disease-detection.git
+
+   ```bash
    cd Cassava-Disease-Detection
+
+   ```bash
    py -3 -m venv .venv
+
+   ```bash
    .venv\Scripts\activate
-   pip install flask tensorflow tensorflow-hub tensorflow-datasets matplotlib opencv-python  
+   
+   ```bash
+   pip install flask tensorflow tensorflow-hub tensorflow-datasets matplotlib opencv-python
+
+   ```bash
+   python app.py
 
 
 ## References
