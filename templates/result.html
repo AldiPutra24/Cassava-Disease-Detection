@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-top: 50px;
+        }
+        img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        h3 {
+            color: #555;
+        }
+        p {
+            color: #666;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prediction Result</h1>
+    <img src="{{ image_url }}" alt="Cassava Leaf">
+    <h2>Disease: {{ disease }}</h2>
+    <h3>Recommended Remedy:</h3>
+    <p>{{ remedy }}</p>
+    <a href="{{ url_for('index') }}">Try Another Image</a>
+</body>
+</html>
