@@ -9,6 +9,7 @@ This project utilizes a pre-trained model to classify cassava leaves into one of
 - **Green Mite (CGM)**
 - **Brown Streak Disease (CBSD)**
 - **Healthy**
+
 The model is hosted on TensorFlow Hub, and the classification process involves uploading an image of a cassava leaf, predicting the disease, and providing recommended remedies for management.
 
 ## Features
@@ -22,4 +23,4 @@ The model is hosted on TensorFlow Hub, and the classification process involves u
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/yourusername/cassava-disease-detection.git
+   git clone https://github.com/AldiPutra24/cassava-disease-detection.git
