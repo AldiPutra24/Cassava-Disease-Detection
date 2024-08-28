@@ -24,21 +24,16 @@ The model is hosted on TensorFlow Hub, and the classification process involves u
    ```bash
    git clone https://github.com/AldiPutra24/cassava-disease-detection.git
 
-   ```bash
    cd Cassava-Disease-Detection
 
-   ```bash
    py -3 -m venv .venv
 
-   ```bash
    .venv\Scripts\activate
-   
-   ```bash
+
    pip install flask tensorflow tensorflow-hub tensorflow-datasets matplotlib opencv-python
 
-   ```bash
    python app.py
-   
+
 
 ## References
 This project is based on the [TensorFlow Hub CropNet Cassava Disease Classifier tutorial](https://www.tensorflow.org/hub/tutorials/cropnet_cassava), which provides a comprehensive guide to using the CropNet model for cassava disease detection.
