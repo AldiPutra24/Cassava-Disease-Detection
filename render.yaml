@@ -1,8 +1,7 @@
 services:
   - type: web
-    name: cassava-disease-detection
+    name: cassava-disease
     env: python
-    region: singapore
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app"
-    pythonVersion: "3.10.11"
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    pythonVersion: 3.10.11
