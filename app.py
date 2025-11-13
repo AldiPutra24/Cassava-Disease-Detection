@@ -1,18 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for
 import tensorflow as tf
 import tensorflow_hub as hub
-import tensorflow_datasets as tfds
 import numpy as np
 import cv2
-import matplotlib.pyplot as plt
 import os
 
 app = Flask(__name__)
 
-# Load the pre-trained model
-classifier = hub.KerasLayer('https://tfhub.dev/google/cropnet/classifier/cassava_disease_V1/2')
+# Lazy load model (Render → tidak timeout)
+classifier = None
 
-# Map the class names to human readable names
+def load_model():
+    global classifier
+    if classifier is None:
+        classifier = hub.KerasLayer(
+            'https://tfhub.dev/google/cropnet/classifier/cassava_disease_V1/2'
+        )
+    return classifier
+
 class_names = ['cmd', 'cbb', 'cgm', 'cbsd', 'healthy', 'unknown']
 name_map = dict(
     cmd='Mosaic Disease',
@@ -20,7 +25,8 @@ name_map = dict(
     cgm='Green Mite',
     cbsd='Brown Streak Disease',
     healthy='Healthy',
-    unknown='Unknown')
+    unknown='Unknown'
+)
 
 remedies = dict(
     cmd='Use virus-free planting material and resistant varieties. Apply appropriate insecticides to control the whitefly population.',
@@ -41,31 +47,36 @@ def preprocess_image(image):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        # Get the uploaded image
-        file = request.files['file']
+        file = request.files.get('file')
         if not file:
             return redirect(request.url)
-        
-        # Save the uploaded image
+
+        # Ensure static folder exists
+        os.makedirs('static', exist_ok=True)
         file_path = os.path.join('static', file.filename)
         file.save(file_path)
 
-        # Load and preprocess the image
         img = cv2.imread(file_path)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img = preprocess_image(img)
 
-        # Predict the disease
-        probabilities = classifier(img)
+        model = load_model()
+        probabilities = model(img)
         prediction = tf.argmax(probabilities, axis=-1)
-        predicted_class = class_names[prediction[0]]
-        predicted_disease = name_map[predicted_class]
-        remedy = remedies[predicted_class]
 
-        # Pass the results to the template
-        return render_template('result.html', image_url=file_path, disease=predicted_disease, remedy=remedy)
+        pred_id = prediction.numpy()[0]
+        pred_class = class_names[pred_id]
+        predicted_disease = name_map[pred_class]
+        remedy = remedies[pred_class]
+
+        return render_template(
+            'result.html',
+            image_url=file_path,
+            disease=predicted_disease,
+            remedy=remedy
+        )
 
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0')
